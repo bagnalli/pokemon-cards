@@ -1,11 +1,15 @@
 import "./App.css";
-import CardComp from "./CardComp";
+import Container from "react-bootstrap/Container";
+import NavBar from "./components/Navbar";
+import Pokemon from "./components/Pokemon";
 
 function App() {
   return (
     <>
-      <p>Pocket ur Monsturu</p>;
-      <CardComp />;
+      <NavBar />
+      <Container>
+        <Pokemon />
+      </Container>
     </>
   );
 }
