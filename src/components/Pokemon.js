@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Form, FormControl } from "react-bootstrap";
 import CardComp from "./CardComp";
 
-function Pokemon() {
+function Pokemon({ searchKeyword }) {
+  const [allPokemon, setAllPokemon] = useState([]);
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +19,6 @@ function Pokemon() {
         }
         const data = await response.json();
 
-        // Fetch additional details for each Pokémon
         const pokemonWithDetails = await Promise.all(
           data.results.map(async (pokeData) => {
             const response = await fetch(pokeData.url);
@@ -34,7 +34,7 @@ function Pokemon() {
             }
             const descriptionData = await descriptionResponse.json();
             const description = descriptionData.flavor_text_entries.find(
-              (entry) => entry.language.name === "en" // You can change the language as needed
+              (entry) => entry.language.name === "en"
             );
 
             return {
@@ -48,6 +48,7 @@ function Pokemon() {
           })
         );
 
+        setAllPokemon(pokemonWithDetails);
         setPokemon(pokemonWithDetails);
         setLoading(false);
       } catch (error) {
@@ -58,6 +59,13 @@ function Pokemon() {
 
     fetchPokemonData();
   }, []);
+
+  useEffect(() => {
+    const filteredPokemon = allPokemon.filter((pokeData) =>
+      pokeData.name.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
+    setPokemon(filteredPokemon);
+  }, [searchKeyword, allPokemon]);
 
   if (loading) {
     return <p>Loading...</p>;
