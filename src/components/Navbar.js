@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Navbar, Container, Form, FormControl } from "react-bootstrap";
+import "../App.css";
+
+
 
 function NavBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,9 +14,9 @@ function NavBar({ onSearch }) {
   };
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark" expand="lg" className="bg-body-tertiary">
+    <Navbar bg="danger" data-bs-theme="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#">Navbar</Navbar.Brand>
+        <Navbar.Brand href="#"><h1>Pokémon Cards</h1></Navbar.Brand>
         <Form className="ms-auto">
           <FormControl
             type="text"

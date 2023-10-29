@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Form, FormControl } from "react-bootstrap";
 import CardComp from "./CardComp";
 
+function capitalizeFirstLetter(str) {
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 function Pokemon({ searchKeyword }) {
   const [allPokemon, setAllPokemon] = useState([]);
   const [pokemon, setPokemon] = useState([]);
@@ -81,9 +89,9 @@ function Pokemon({ searchKeyword }) {
         {pokemon.map((pokeData, index) => (
           <CardComp
             key={index}
-            name={pokeData.name}
+            name={capitalizeFirstLetter(pokeData.name)}
             imageUrl={pokeData.imageUrl}
-            types={pokeData.types}
+            types={capitalizeFirstLetter(pokeData.types.join(" / "))}
             description={pokeData.description}
           />
         ))}

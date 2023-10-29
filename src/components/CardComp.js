@@ -1,8 +1,8 @@
-// import "./App.css";
-
 // BOOTSTRAP IMPORTS
 import Card from "react-bootstrap/Card";
 // import Button from "react-bootstrap/Button";
+
+import "../App.css";
 
 function CardComp({ name, types, description, imageUrl }) {
   return (
