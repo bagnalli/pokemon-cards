@@ -9,9 +9,9 @@ function App() {
 
   return (
     <>
-      <NavBar onSearch={setSearchKeyword} /> {/* Pass the setSearchKeyword function to NavBar */}
-      <Container>
-        <Pokemon searchKeyword={searchKeyword} /> {/* Pass the searchKeyword prop to Pokemon */}
+      <NavBar onSearch={setSearchKeyword} />
+      <Container className="m-4">
+        <Pokemon searchKeyword={searchKeyword} />
       </Container>
     </>
   );

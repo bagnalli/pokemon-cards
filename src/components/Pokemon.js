@@ -85,7 +85,7 @@ function Pokemon({ searchKeyword }) {
 
   return (
     <Container>
-      <Row>
+      <Row className="justify-content-center">
         {pokemon.map((pokeData, index) => (
           <CardComp
             key={index}

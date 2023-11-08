@@ -14,9 +14,16 @@ function NavBar({ onSearch }) {
   };
 
   return (
-    <Navbar bg="danger" data-bs-theme="light" expand="lg">
+    <Navbar className="navbar" data-bs-theme="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#"><h1>Pokémon Cards</h1></Navbar.Brand>
+        <Navbar.Brand href="#"><h1>Pokémon</h1>        </Navbar.Brand>
+        <img
+          alt=""
+          src="https://archives.bulbagarden.net/media/upload/thumb/9/9a/0151Mew.png/1200px-0151Mew.png"
+          width="40"
+          height="40"
+          className="d-inline-block align-top"
+        />
         <Form className="ms-auto">
           <FormControl
             type="text"
