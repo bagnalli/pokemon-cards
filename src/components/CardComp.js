@@ -1,6 +1,6 @@
 // BOOTSTRAP IMPORTS
 import Card from "react-bootstrap/Card";
-// import Button from "react-bootstrap/Button";
+import Button from "react-bootstrap/Button";
 
 import "../App.css";
 
@@ -15,14 +15,16 @@ function CardComp({ name, types, description, firstMove, secondMove, imageUrl })
         margin: "auto",
       }} />
       <Card.Body className="pokemon-card-desc">
-        {/* <Card.Title>{firstMove}</Card.Title> */}
-        <Card.Text className="card-text card-types">{types}</Card.Text>
-        <Card.Text className="card-text card-types">1 {firstMove}</Card.Text>
-        <Card.Text className="card-text card-types">2 {secondMove}</Card.Text>
+        <Card.Title className="card-text card-title">{types}</Card.Title>
+        <Card.Text className="card-text card-types">{firstMove}</Card.Text>
+        <Card.Text className="card-text card-types">{secondMove}</Card.Text>
+
+        {/* <Card.Text className="card-text card-description">{firstMove}</Card.Text> */}
+        {/* <Card.Text className="card-text card-description">{secondMove}</Card.Text> */}
 
         {/* <Card.Text className="card-text card-description">{description}</Card.Text> */}
 
-        {/* <Button variant="primary">Go somewhere</Button> */}
+        <Button className="catch-button">Catch Pokemon</Button>
       </Card.Body>
     </Card>
   );
