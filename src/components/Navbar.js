@@ -19,7 +19,7 @@ function NavBar({ onSearch }) {
         <Navbar.Brand href="#"><h1>Pokémon</h1>        </Navbar.Brand>
         <img
           alt=""
-          src="https://archives.bulbagarden.net/media/upload/thumb/9/9a/0151Mew.png/1200px-0151Mew.png"
+          src=""
           width="40"
           height="40"
           className="d-inline-block align-top"

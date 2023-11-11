@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 
 import "../App.css";
 
-function CardComp({ name, types, description, imageUrl }) {
+function CardComp({ name, types, description, firstMove, secondMove, imageUrl }) {
   return (
     <Card className="pokemon-card m-2" style={{ width: "18rem", height: "30rem" }}>
       <Card.Header className="card-header">{name}</Card.Header>
@@ -15,9 +15,12 @@ function CardComp({ name, types, description, imageUrl }) {
         margin: "auto",
       }} />
       <Card.Body className="pokemon-card-desc">
-        {/* <Card.Title></Card.Title> */}
+        {/* <Card.Title>{firstMove}</Card.Title> */}
         <Card.Text className="card-text card-types">{types}</Card.Text>
-        <Card.Text className="card-text card-description">{description}</Card.Text>
+        <Card.Text className="card-text card-types">1 {firstMove}</Card.Text>
+        <Card.Text className="card-text card-types">2 {secondMove}</Card.Text>
+
+        {/* <Card.Text className="card-text card-description">{description}</Card.Text> */}
 
         {/* <Button variant="primary">Go somewhere</Button> */}
       </Card.Body>

@@ -4,7 +4,7 @@
 
 body {
     position: relative;
-    background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/96a6e381769399.5d096fa30e358.jpg');
+    /* background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/96a6e381769399.5d096fa30e358.jpg'); */
     /* Set your background image here */
     background-size: cover;
     background-attachment: fixed;
@@ -13,7 +13,7 @@ body {
     padding: 0;
 }
 
-body::before {
+/* body::before {
     content: '';
     position: fixed;
     top: 0;
@@ -22,8 +22,7 @@ body::before {
     height: 100%;
     background: linear-gradient(to bottom, #e9eaeb, #b5b5b5);
     opacity: 0.7;
-    /* Adjust the opacity as needed */
-}
+} */
 
 /* Just the title */
 h1 {

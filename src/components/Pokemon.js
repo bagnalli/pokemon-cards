@@ -17,53 +17,56 @@ function Pokemon({ searchKeyword }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Call POKEMON from API
     const fetchPokemonData = async () => {
       try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon?limit=151`
-        );
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`);
         if (!response.ok) {
           throw new Error("Failed to fetch Pokemon data.");
         }
         const data = await response.json();
 
-        const pokemonWithDetails = await Promise.all(
-          data.results.map(async (pokeData) => {
-            const response = await fetch(pokeData.url);
-            if (!response.ok) {
-              throw new Error(`Failed to fetch data for ${pokeData.name}`);
-            }
-            const details = await response.json();
-            const descriptionResponse = await fetch(details.species.url);
-            if (!descriptionResponse.ok) {
-              throw new Error(
-                `Failed to fetch description for ${pokeData.name}`
-              );
-            }
-            const descriptionData = await descriptionResponse.json();
-            const description = descriptionData.flavor_text_entries.find(
-              (entry) => entry.language.name === "en"
-            );
+        const pokemonDetailsPromises = data.results.map(async (pokeData) => {
+          const response = await fetch(pokeData.url);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch data for ${pokeData.name}`);
+          }
 
-            return {
-              name: pokeData.name,
-              imageUrl: details.sprites.front_default,
-              types: details.types.map((type) => type.type.name),
-              description: description
-                ? description.flavor_text
-                : "No description available",
-            };
-          })
-        );
+          const details = await response.json();
+
+
+          let callMove = details.moves[3];
+          let move = callMove ? callMove.move.name : undefined;
+          if (move === null) {
+            return 'Struggle'
+          }
+
+          // const moveUrl = details.moves.move.url
+
+          // console.log(move);
+
+          return {
+            name: pokeData.name,
+            imageUrl: details.sprites.front_default,
+            types: details.types.map((type) => type.type.name),
+            firstMove: details.moves.length > 0 ? details.moves[0].move.name : 'No moves available',
+            secondMove: move,
+
+          };
+        });
+
+        const pokemonWithDetails = await Promise.all(pokemonDetailsPromises);
 
         setAllPokemon(pokemonWithDetails);
         setPokemon(pokemonWithDetails);
         setLoading(false);
       } catch (error) {
-        setError("Error fetching Pokemon data.");
+        console.error("Error fetching Pokemon data:", error);
+        setError(`Error fetching Pokemon data: ${error.message}`);
         setLoading(false);
       }
     };
+
 
     fetchPokemonData();
   }, []);
@@ -80,7 +83,8 @@ function Pokemon({ searchKeyword }) {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p style={{ color: 'red' }}>{error}</p>;
+
   }
 
   return (
@@ -92,9 +96,11 @@ function Pokemon({ searchKeyword }) {
             name={capitalizeFirstLetter(pokeData.name)}
             imageUrl={pokeData.imageUrl}
             types={capitalizeFirstLetter(pokeData.types.join(" / "))}
-            description={pokeData.description}
+            firstMove={capitalizeFirstLetter(pokeData.firstMove ? pokeData.firstMove.replace(/-/g, ' ') : 'No Move')}
+            secondMove={capitalizeFirstLetter(pokeData.secondMove ? pokeData.secondMove.replace(/-/g, ' ') : 'No Move')}
           />
         ))}
+
       </Row>
     </Container>
   );
